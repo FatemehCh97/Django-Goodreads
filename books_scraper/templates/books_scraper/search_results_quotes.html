@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results for Quotes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .quote {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .quote p {
+            margin: 5px 0;
+        }
+        .quote-text {
+            font-style: italic;
+            color: #333;
+        }
+        .author {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .likes {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results for Quotes</h1>
+        {% if quotes_info_list %}
+            {% for quote_info in quotes_info_list %}
+                <div class="quote">
+                    <p class="quote-text">{{ quote_info.quote }}</p>
+                    <p><span class="author">Author:</span> {{ quote_info.author }}</p>
+                    <p><span class="likes">Likes:</span> {{ quote_info.likes }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No quotes found for the search query.</p>
+        {% endif %}
+        <p><a href="{% url 'search' %}">&#x1F50D; Back to Search Page</a></p>
+    </div>
+</body>
+</html>

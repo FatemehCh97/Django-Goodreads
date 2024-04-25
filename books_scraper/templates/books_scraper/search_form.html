@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search for Books or Quotes &#x1F50D;</h1>
+        <form action="{% url 'search' %}" method="GET">
+            <input type="text" name="search_query" id="searchQuery" placeholder="Search by Book Title, Author, or Quote">
+            <input type="hidden" name="search_type" id="searchType" value="books">
+            <div class="button-container">
+                <button type="submit" onclick="document.getElementById('searchType').value='books'">&#x1F4DA; Search Books</button>
+                <button type="submit" onclick="document.getElementById('searchType').value='quotes'">&#x1F4AC; Search Quotes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

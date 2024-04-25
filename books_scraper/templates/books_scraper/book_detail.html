@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book_info.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            line-height: 1.5;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ book_info.title }}</h1>
+    <p><strong>Author:</strong> {{ book_info.author }}</p>
+    <p><strong>Average Rating:</strong> {{ book_info.avg_rating }}</p>
+    <p><strong>Rating Count:</strong> {{ book_info.rating_count }}</p>
+    <p><strong>Review Count:</strong> {{ book_info.review_count }}</p>
+    <p><strong>Genres:</strong> {{ book_info.genres }}</p>
+    <p><strong>Number of Pages:</strong> {{ book_info.num_pages }}</p>
+    <p><strong>Publish Date:</strong> {{ book_info.publish_date }}</p>
+    <p><strong>Book URL:</strong> <a href="{{ book_info.goodreads_url }}">{{ book_info.goodreads_url }}</a></p>
+    <br>
+    <p><a href="{% url 'search_results' search_query %}">&#x25C0; Back to Search Results</a></p>
+    <p><a href="{% url 'search' %}">&#x1F50D; Back to Search Page</a></p>
+</body>
+</html>

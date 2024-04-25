@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .content {
+            width: 75%;
+            text-align: left;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        li {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .filter-section {
+            width: 25%;
+            text-align: left;
+            margin-top: 8px;
+            margin-left: auto
+        }
+
+        .filter-section label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .filter-section input[type="text"],
+        .filter-section input[type="date"],
+        .filter-section input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .genre-checkboxes {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .genre-checkboxes div {
+            margin-bottom: 5px;
+        }
+
+        .genre-checkboxes input[type="checkbox"],
+        .genre-checkboxes label {
+            display: inline;
+            font-weight: normal;
+        }
+
+        .genre-checkboxes input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .apply-button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+        .clear-button {
+            background-color: #e5f7ff;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 6px;
+            cursor: pointer;
+            float: right;
+            }
+
+        .clear-button:hover {
+            background-color: #c5d5e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Books Search Results for '{{ search_query }}'</h1>
+            <div class="books-results">
+                <!-- Book Results -->
+                <p class="result-count">Number of Results: {{ book_info_list|length }}</p>
+                {% if book_info_list %}
+                    <ul>
+                        {% for book_info in book_info_list %}
+                            <li>
+                                <a href="{% url 'book_detail' book_info.goodreads_id %}?search_query={{ book_info.search_query }}">
+                                    <strong>{{ book_info.title }}</strong> - {{ book_info.author }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No book found for your search query.</p>
+                {% endif %}
+                <p class="back-link">
+                    <a href="{% url 'search' %}">&#x1F50D; Back to Search Page</a>
+                </p>
+            </div>
+        </div>
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h2>Filters:</h2>
+            <form action="{% url 'filter_results' search_query %}" method="GET">
+                <div class="genre-selection">
+                    <label for="genre-search">Genres:</label>
+                    <input type="text" name="genre" id="genre-search" placeholder="Search genre">
+                    <div class="genre-checkboxes">
+                        {% for genre in genres %}
+                            <div>
+                                <input type="checkbox" name="genres" id="genre_{{ forloop.counter }}" value="{{ genre }}">
+                                <label for="genre_{{ forloop.counter }}">{{ genre }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="reset" class="clear-button">Clear Selections</button><br>
+                </div>
+                <label for="rating">Rating: </label>
+                <input type="number" min="0" max="5" step="0.1" name="min_rating" id="min-ratings" placeholder="Minimum Rating">
+                <input type="number" min="0" max="5" step="0.1" name="max_rating" id="max-ratings" placeholder="Maximum Rating">
+                <label for="publish-date-start">Publish Date Start:</label>
+                <input type="date" name="publish_date_start" id="publish-date-start">
+                <label for="publish-date-end">Publish Date End:</label>
+                <input type="date" name="publish_date_end" id="publish-date-end">
+                <button type="submit" class="apply-button">Apply Filter</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

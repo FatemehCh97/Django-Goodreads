@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Goodreads Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 70px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .button-container a {
+            text-decoration: none;
+            margin: 10px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #398bc0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #398bc0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Goodreads Scraper</h1>
+        <div class="button-container">
+            <a href="{% url 'search' %}" class="button">Search Books</a>
+            <a href="{% url 'admin:index' %}" class="button">Admin</a>
+        </div>
+    </div>
+</body>
+</html>

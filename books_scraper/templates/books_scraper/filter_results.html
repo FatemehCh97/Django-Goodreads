@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtered Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        li {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .back-link {
+            margin-top: 35px;
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Filtered Books Search Results for '{{ search_query }}'</h1>
+        <p class="result-count">Number of Results: {{ result_count }}</p>
+        {% if book_info_list %}
+            <ul>
+                {% for book_info in book_info_list %}
+                    <li>
+                        <a href="{% url 'book_detail' book_info.goodreads_id %}?search_query={{ search_query }}">
+                            <strong>{{ book_info.title }}</strong> - {{ book_info.author }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books found matching the specified filters.</p>
+        {% endif %}
+        <p class="back-link">
+            <a href="javascript:history.back()">&#x25C0; Back to Previous Page</a><br>
+            <a href="{% url 'search' %}">&#x1F50D; Back to Search Page</a>
+        </p>
+    </div>
+</body>
+</html>
