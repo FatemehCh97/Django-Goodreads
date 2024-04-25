@@ -15,10 +15,10 @@ This project is a Django-based web application that allows users to search for b
 
 ## Installation
 
-1. Open a terminal or command prompt and navigate to the project directory.
+1. Clone the Repository:
 
     ```bash
-    cd blog_project
+    git clone https://github.com/FatemehCh97/Django-Goodreads.git
     ```
 
 2. Install dependencies:
@@ -46,7 +46,7 @@ This project is a Django-based web application that allows users to search for b
     python manage.py runserver
     ```
 
-6. Open your web browser and navigate to `http://127.0.0.1:8000/` to access the application.
+6. Open your web browser and navigate to `http://localhost:8000/` to access the application.
 
 ## Usage
 
@@ -55,7 +55,7 @@ This project is a Django-based web application that allows users to search for b
 - Enter a search query (quote keyword) and click "Search Quotes" to search for quotes.
 - View the search results and click on a book to see detailed information.
 - On the book details page (http://localhost:8000/book/{goodreads_id}/), you can navigate back to the search results or the search page.
-- Access the admin interface at `http://127.0.0.1:8000/admin/` to manage datas as a superuser.
+- Access the admin interface at `http://localhost:8000/admin/` to manage datas as a superuser.
 
 **Note:**
 
